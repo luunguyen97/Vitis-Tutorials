@@ -36,12 +36,21 @@ unset LD_LIBRARY_PATH
 source $XILINX_VITIS/data/emulation/qemu/unified_qemu_v4_2/environment-setup-aarch64-xilinx-linux
 ```
 
+Download ZCU102 base platform and xilinx-zynqmp-common-v2020.1 and extract these 2 file (see step2.md)
+Install sysroot:
+```bash 
+cd xilinx-zynqmp-common-v2020.1
+./sdk.sh
+```
+Install SDK to the default repo: /opt/petalinux/2020.1
+
 * Then make sure the following environment variables are correctly set to point to the your ZCU102 platform, rootf and sysroot directories respectively.
 
 ```bash
 export PLATFORM_REPO_PATHS=<path to the ZCU102 platform install dir>
-export ROOTFS=<path to the ZCU102 rootfs directory>
-export SYSROOT=<path to the ZCU102 sysroot directory>
+gunzip <mpsoc common system>/xilinx-zynqmp-common-v2020.1/rootfs.exte.gz
+export ROOTFS=<mpsoc common system>/xilinx-zynqmp-common-v2020.1
+export SYSROOT=/opt/petalinux2020.1/sysroots/aarch64-xilinx-linux
 ```
 
 
@@ -118,7 +127,7 @@ TEST PASSED
 
 ```bash
 cd ../hw_emu
-
+export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
 aarch64-linux-gnu-g++ -Wall -g -std=c++11 ../../src/host.cpp -o app.exe -I${SYSROOT}/usr/include/xrt -L${SYSROOT}/usr/lib -lOpenCL -lpthread -lrt -lstdc++ --sysroot=${SYSROOT}
 emconfigutil --platform xilinx_zcu102_base_202010_1 --nd 1
 v++ -c -t hw_emu --config ../../src/zcu102.cfg -k vadd -I../../src ../../src/vadd.cpp -o vadd.xo 

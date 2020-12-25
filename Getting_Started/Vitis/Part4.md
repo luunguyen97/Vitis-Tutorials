@@ -36,7 +36,8 @@ unset LD_LIBRARY_PATH
 source $XILINX_VITIS/data/emulation/qemu/unified_qemu_v4_2/environment-setup-aarch64-xilinx-linux
 ```
 
-Download ZCU102 base platform and xilinx-zynqmp-common-v2020.1 and extract these 2 file (see step2.md)
+Download ZCU102 base platform and xilinx-zynqmp-common-v2020.1 and extract these 2 file (see step2.md).
+
 Install sysroot:
 ```bash 
 cd xilinx-zynqmp-common-v2020.1
